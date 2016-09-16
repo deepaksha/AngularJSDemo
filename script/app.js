@@ -3,9 +3,13 @@
  * 
  */
  angular.module('myTodoApp', [
+  'TODOService',
+  'EscapeDirective',
+  'FocusDirective',
   'RouteController',
   'HomeController',
   'BlogController',
-  'AboutController'
+  'AboutController',
+  'TodoController'
 
   ]);

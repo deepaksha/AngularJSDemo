@@ -1,0 +1,62 @@
+<div class="container-fluid">
+
+	<section id="todoapp">
+		<div class="row">
+			<header id="header">
+				<h1 class='text-center'>Todos</h1>
+
+				<form id="todo-form" ng-submit="addTodo()">
+					<div class="form-group">
+						<input id="new-todo" placeholder="What needs to be done?" ng-model="newTodo" ng-disabled="saving" class="form-control"  autofocus />
+					</div>
+				</form>
+
+			</header>
+		</div>
+
+		<div class="well  row">
+			<section id="main" ng-show="todos.length" ng-cloak>
+				
+				<input id="toggle-all" type="checkbox"  ng-model="allChecked" ng-click="markAll(allChecked)">
+				<label for="toggle-all">Mark all as complete</label>
+
+				<ul id="todo-list"  class="list-group">
+					<li ng-repeat="todo in todos | filter:statusFilter track by $index" ng-class="{completed: todo.completed, editing: todo == editedTodo}" class="list-group-item">
+						<div class="view" style='overflow-wrap: break-word;  word-wrap: break-word; word-break: break-all;'>
+							  
+ 							   	<span>
+									<input class="toggle"  type="checkbox" ng-model="todo.completed" ng-change="toggleCompleted(todo)" />
+								</span>
+
+								<del ng-if="todo.completed"> <span ng-dblclick="editTodo(todo)"><strong>{{todo.title}}</strong></span> </del>
+								<span ng-if="!todo.completed" ng-dblclick="editTodo(todo)"><strong>{{todo.title}}</strong></span>
+							 	<span><a class="btn btn-link" ng-click="removeTodo(todo);"> <i class='glyphicon glyphicon-remove-circle text-danger'/></a></span>
+							 
+						</div>
+						<form ng-submit="saveEdits(todo, 'submit')">
+							<input class="edit" ng-trim="false" ng-model="todo.title" todo-escape="revertEdits(todo)" ng-blur="saveEdits(todo, 'blur')" todo-focus="todo == editedTodo">
+						</form>
+					</li>
+				</ul>
+			</section>
+		
+
+		<footer id="footer" ng-show="todos.length" ng-cloak>
+		
+			<span id="todo-count"><strong>{{remainingCount}}</strong>
+				<ng-pluralize count="remainingCount" when="{ one: 'item left', other: 'items left' }"></ng-pluralize>
+			</span>
+			
+			<div class="btn-group" role="group" aria-label="...">
+				 <a ng-class="{selected: status == ''} " class='btn btn-link' href="#/todo/">All</a>
+				 <a ng-class="{selected: status == 'active'}" class="btn btn-link" href="#/todo/active">Active</a>
+				 <a ng-class="{selected: status == 'completed'}" class="btn btn-link" href="#/todo/completed">Completed</a>
+		 	</div>
+ 
+			<button id="clear-completed" class='btn btn-danger' ng-click="clearCompletedTodos()" ng-show="completedCount">Clear completed</button>
+
+		</footer>
+		</div>
+
+	</section>
+</div>

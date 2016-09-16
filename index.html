@@ -22,6 +22,7 @@
       <div class="container">
         <nav class="blog-nav">
           <a class="blog-nav-item" href="#/">Home</a>
+          <a class="blog-nav-item" href="#/todo">Todo Demo</a>
           <a class="blog-nav-item" href="#/blog">Blog</a>
           <a class="blog-nav-item" href="#/about">About</a>
         </nav>
@@ -34,9 +35,15 @@
      
     <!-- Include javascript require to define register app as well as other controller and service classes -->
     <script src="script/app.js"></script>
+    <script src="script/service/todo/service.js"></script>
     <script src="script/common/route.js"></script>
+
     <script src="script/controller/home/HomeController.js"></script>
     <script src="script/controller/blog/BlogController.js"></script>
     <script src="script/controller/about/AboutController.js"></script>
+    <script src="script/controller/todo/TodoController.js"></script>
+
+    <script src="script/directive/TodoEscapeDirective.js"></script>
+    <script src="script/directive/TodoFocusDirective.js"></script>
   </body>
 </html>
