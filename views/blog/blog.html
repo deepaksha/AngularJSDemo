@@ -1,3 +1,187 @@
-<h1>Blog</h1>
+<div class="container">
 
-<h3>{{message}}</h3>
+	<div class='row'>
+
+		<div class="panel panel-default">
+			 <div class="panel-heading">
+			 	 	<h2>What is angular js ?</h2>
+		  	 </div>
+
+			  <div class="panel-body">
+			   AngularJS is a <abbr title="In computer programming, a software framework is an abstraction in which software providing generic functionality can be selectively changed by additional user-written code, thus providing application-specific software." class="initialism"><mark>structural framework</mark></abbr> for dynamic web apps. It lets us use HTML as our template language and lets us extend HTML's syntax to express our application's components clearly and succinctly. Angular's <abbr title="Data-binding in Angular apps is the automatic synchronization of data between the model and view components. The way that Angular implements data-binding lets you treat the model as the single-source-of-truth in our application. The view is a projection of the model at all times."  class="initialism"><mark>data binding</mark></abbr> and <abbr title="Dependency Injection (DI) is a software design pattern that deals with how components get hold of their dependencies. The Angular injector subsystem is in charge of creating components, resolving their dependencies, and providing them to other components as requested."><mark>dependency injection</mark></abbr> eliminate much of the code you would otherwise have to write. And it all happens within the browser, making it an ideal partner with any server technology.
+			  </div>
+
+		</div>
+
+	</div>
+
+
+	<div class='row'>
+
+		<div class="panel panel-default">
+			 <div class="panel-heading">
+			 	 	<h2>Modules</h2>
+		  	 </div>
+
+			  <div class="panel-body">
+			   Modules act as a container for the different part of app - controllers, services, filters, directives, etc.
+			   Most application have an entry point which define from the state of main method. Angular apps don't have a main method. Instead modules declaratively specify how an application should be bootstrapped. There are several advantages to this approach:
+			   		<ul>
+						<li>The declarative process is easier to understand.</li>
+						<li>You can package code as reusable modules.</li>
+						<li>The modules can be loaded in any order (or even in parallel) because modules delay execution.</li>
+						<li>Unit tests only have to load relevant modules, which keeps them fast.</li>
+						<li>End-to-end tests can use modules to override configuration.</li>
+					</ul>
+
+					A module is a collection of configuration and run blocks which get applied to the application during the bootstrap process. In its simplest form the module consists of a collection of two kinds of blocks:
+					<ul>
+						<li>
+						Configuration blocks - get executed during the provider registrations and configuration phase. Only providers and constants can be injected into configuration blocks. This is to prevent accidental instantiation of services before they have been fully configured.
+						</li>
+						<li>
+						Run blocks - get executed after the injector is created and are used to kickstart the application. Only instances and constants can be injected into run blocks. This is to prevent further system configuration during application run time.
+						</li>
+					</ul>
+
+						<pre>angular.module('myModule', []).
+	config(function(injectables) {
+	  // provider-injector
+	  // This is an example of config block.
+	  // You can have as many of these as you want.
+	  // You can only inject Providers (not instances)
+	  // into config blocks.
+	}).
+	run(function(injectables) { 
+	  // instance-injector
+	  // This is an example of a run block.
+	  // You can have as many of these as you want.
+	  // You can only inject instances (not Providers)
+	  // into run blocks
+});</pre>	
+<h3>Configuration Blocks</h3>
+There are some convenience methods on the module which are equivalent to the config block. For example:
+<pre>
+angular.module('myModule', []).
+  value('a', 123).
+  factory('a', function() { return 123; }).
+  directive('directiveName', ...).
+  filter('filterName', ...);
+
+// is same as
+
+angular.module('myModule', []).
+  config(function($provide, $compileProvider, $filterProvider) {
+    $provide.value('a', 123);
+    $provide.factory('a', function() { return 123; });
+    $compileProvider.directive('directiveName', ...);
+    $filterProvider.register('filterName', ...);
+  });	
+</pre>
+<h3>Run Blocks</h3>
+Run blocks are the closest thing in Angular to the main method. A run block is the code which needs to run to kickstart the application. It is executed after all of the services have been configured and the injector has been created.
+
+			  </div>
+
+
+		</div>
+
+	</div>
+
+
+	<div class='row'>
+
+		<div class="panel panel-default">
+			 <div class="panel-heading">
+			 	 	<h2>Conrollers</h2>
+		  	 </div>
+
+			  <div class="panel-body">
+			  		In Angular, a Controller is defined by a JavaScript constructor function that is used to augment the Angular Scope.
+
+When a Controller is attached to the DOM via the ng-controller directive, Angular will instantiate a new Controller object, using the specified Controller's constructor function. A new child scope will be created and made available as an injectable parameter to the Controller's constructor function as $scope.
+
+If the controller has been attached using the controller as syntax then the controller instance will be assigned to a property on the new scope.
+
+Use controllers to:
+<ul>
+<li>Set up the initial state of the $scope object.</li>
+<li>Add behavior to the $scope object.</li>
+</ul>
+Do not use controllers to:
+<ul>
+<li>Manipulate DOM — Controllers should contain only business logic. Putting any presentation logic into Controllers significantly affects its testability. Angular has databinding for most cases and directives to encapsulate manual DOM manipulation.</li>
+<li>Format input — Use angular form controls instead.</li>
+<li>Filter output — Use angular filters instead.</li>
+<li>Share code or state across controllers — Use angular services instead.</li>
+<li>Manage the life-cycle of other components (for example, to create service instances).</li>
+</ul>
+			  </div>
+		  </div>
+ 	 </div>
+
+
+
+	<div class='row'>
+
+		<div class="panel panel-default">
+			 <div class="panel-heading">
+			 	 	<h2>Services</h2>
+		  	 </div>
+
+			  <div class="panel-body">
+Angular services are substitutable objects that are wired together using dependency injection (DI). You can use services to organize and share code across our app.
+
+Angular services are:
+<ul>
+<li>Lazily instantiated – Angular only instantiates a service when an application component depends on it.</li>
+<li>Singletons – Each component dependent on a service gets a reference to the single instance generated by the service factory.
+Angular offers several useful services (like $http), but for most applications you'll also want to create our own.</li>
+</ul>
+
+<h4>Creating a Service</h4>
+Application developers are free to define their own services by registering the service's name and service factory function, with an Angular module.
+
+The service factory function generates the single object or function that represents the service to the rest of the application. The object or function returned by the service is injected into any component (controller, service, filter or directive) that specifies a dependency on the service.
+
+<h4>Registering Services</h4>
+<pre>
+var myModule = angular.module('myModule', []);
+myModule.factory('serviceId', function() {
+  var shinyNewServiceInstance;
+  // factory function body that constructs shinyNewServiceInstance
+  shinyNewServiceInstance : {
+	getHello: function() {
+       return "Hello";
+	 }
+  }
+  return shinyNewServiceInstance;
+});
+</pre>
+			  </div>
+
+	  </div>
+
+  </div>		
+
+	<div class='row'>
+
+		<div class="panel panel-default">
+			 <div class="panel-heading">
+			 	 	<h2>Directives <small> Will cover in next session!</small></h2>
+		  	 </div>
+
+			  <div class="panel-body">
+			  	At a high level, directives are markers on a DOM element (such as an attribute, element name, comment or CSS class) that tell AngularJS's HTML compiler ($compile) to attach a specified behavior to that DOM element (e.g. via event listeners), or even to transform the DOM element and its children.
+
+Angular comes with a set of these directives built-in, like ngBind, ngModel, and ngClass. Much like you create controllers and services, you can create your own directives for Angular to use. When Angular bootstraps your application, the HTML compiler traverses the DOM matching directives against the DOM elements.
+			  </div>
+
+		  </div>
+
+	  </div>
+
+
+
+
+</div>

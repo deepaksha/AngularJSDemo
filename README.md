@@ -12,7 +12,7 @@ Prerequisite to run this application
 - Install Node js in system from starch
 	 a) Download the Windows installer from the Nodes.js® web site.
 	 b) Run the installer (the .msi file you downloaded in the previous step.)
-	 c) Restart your computer. You won’t be able to run Node.js® until you restart your computer.
+	 c) Restart our computer. You won’t be able to run Node.js® until you restart our computer.
 	 
 	 
 2) How to run the program
@@ -20,5 +20,5 @@ Prerequisite to run this application
 	b) Go to inside the downloaded folder
 	c) Open the command prompt from inside the folder.
 	d) type node server.js
-	e) Open any browser in your system.
+	e) Open any browser in our system.
 	f) open http://localhost:8888
